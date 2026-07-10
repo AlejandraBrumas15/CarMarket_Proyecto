@@ -29,34 +29,33 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
+            this.btIniciar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lb = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtNombreI = new System.Windows.Forms.TextBox();
+            this.txtContraseñaI = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lkRegistrar = new System.Windows.Forms.LinkLabel();
             this.pbClose = new System.Windows.Forms.PictureBox();
             this.pbMaximizar = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaximizar)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btIniciar
             // 
-            this.button1.BackColor = System.Drawing.Color.PaleGreen;
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(265, 350);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 45);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Iniciar Sesión";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btIniciar.BackColor = System.Drawing.Color.PaleGreen;
+            this.btIniciar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btIniciar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btIniciar.Location = new System.Drawing.Point(265, 350);
+            this.btIniciar.Name = "btIniciar";
+            this.btIniciar.Size = new System.Drawing.Size(131, 45);
+            this.btIniciar.TabIndex = 0;
+            this.btIniciar.Text = "Iniciar Sesión";
+            this.btIniciar.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -88,15 +87,15 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Inicia sesión";
             // 
-            // label4
+            // lb
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(133, 197);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 19);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Usuario:";
+            this.lb.AutoSize = true;
+            this.lb.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb.Location = new System.Drawing.Point(133, 197);
+            this.lb.Name = "lb";
+            this.lb.Size = new System.Drawing.Size(79, 19);
+            this.lb.TabIndex = 4;
+            this.lb.Text = "Nombre:";
             // 
             // label5
             // 
@@ -108,21 +107,21 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Contraseña:";
             // 
-            // textBox1
+            // txtNombreI
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(231, 197);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(206, 26);
-            this.textBox1.TabIndex = 6;
+            this.txtNombreI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombreI.Location = new System.Drawing.Point(231, 197);
+            this.txtNombreI.Name = "txtNombreI";
+            this.txtNombreI.Size = new System.Drawing.Size(206, 26);
+            this.txtNombreI.TabIndex = 6;
             // 
-            // textBox2
+            // txtContraseñaI
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(231, 246);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(206, 26);
-            this.textBox2.TabIndex = 7;
+            this.txtContraseñaI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContraseñaI.Location = new System.Drawing.Point(231, 246);
+            this.txtContraseñaI.Name = "txtContraseñaI";
+            this.txtContraseñaI.Size = new System.Drawing.Size(206, 26);
+            this.txtContraseñaI.TabIndex = 7;
             // 
             // label6
             // 
@@ -134,16 +133,16 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "(Si no tienes cuenta aún, que esperar para crearla?)";
             // 
-            // linkLabel1
+            // lkRegistrar
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.linkLabel1.Location = new System.Drawing.Point(426, 313);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(82, 13);
-            this.linkLabel1.TabIndex = 9;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Regístrate aquí";
+            this.lkRegistrar.AutoSize = true;
+            this.lkRegistrar.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lkRegistrar.Location = new System.Drawing.Point(426, 313);
+            this.lkRegistrar.Name = "lkRegistrar";
+            this.lkRegistrar.Size = new System.Drawing.Size(82, 13);
+            this.lkRegistrar.TabIndex = 9;
+            this.lkRegistrar.TabStop = true;
+            this.lkRegistrar.Text = "Regístrate aquí";
             // 
             // pbClose
             // 
@@ -178,15 +177,15 @@
             this.ClientSize = new System.Drawing.Size(677, 450);
             this.Controls.Add(this.pbMaximizar);
             this.Controls.Add(this.pbClose);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.lkRegistrar);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtContraseñaI);
+            this.Controls.Add(this.txtNombreI);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lb);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btIniciar);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
@@ -203,16 +202,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btIniciar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lb;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtNombreI;
+        private System.Windows.Forms.TextBox txtContraseñaI;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lkRegistrar;
         private System.Windows.Forms.PictureBox pbClose;
         private System.Windows.Forms.PictureBox pbMaximizar;
     }
