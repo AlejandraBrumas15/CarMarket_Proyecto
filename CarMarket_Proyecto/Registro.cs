@@ -101,6 +101,10 @@ namespace CarMarket_Proyecto
             Usuario nuevoUsuario = new Usuario(nombre, edad, email, telefono, contraseña);
 
             MessageBox.Show("Usuario registrado: " + nuevoUsuario.GetNombre());
+
+            Form1 formLogin = new Form1();
+            formLogin.Show();
+            this.Hide();
         }
     }
 }

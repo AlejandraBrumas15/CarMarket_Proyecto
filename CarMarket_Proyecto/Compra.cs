@@ -10,16 +10,15 @@ using System.Windows.Forms;
 
 namespace CarMarket_Proyecto
 {
-    public partial class Form1 : Form
+    public partial class Compra : Form
     {
         private float anchoOriginal;
         private float altoOriginal;
-        public Form1()
+        public Compra()
         {
             InitializeComponent();
         }
-        
-
+        // desde aqui el codigo se encarga de minimizar, y cerrar y aparte mantener el tamaño en caso de que se minimice y se maximice la ventana
         private void pbClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -35,16 +34,15 @@ namespace CarMarket_Proyecto
             {
                 this.WindowState = FormWindowState.Maximized; // lo vuelve pantalla completa
             }
-
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Compra_Load(object sender, EventArgs e)
         {
             anchoOriginal = this.ClientSize.Width;
             altoOriginal = this.ClientSize.Height;
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        private void Compra_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
@@ -92,19 +90,10 @@ namespace CarMarket_Proyecto
             }
         }
 
-        
-
-        private void btIniciar_Click(object sender, EventArgs e)
+        private void pbVolver_Click(object sender, EventArgs e)
         {
             PantallaInicio pantallaInicio = new PantallaInicio();
             pantallaInicio.Show();
-            this.Hide();
-        }
-
-        private void lkRegistrar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Registro formRegistro = new Registro();
-            formRegistro.Show();
             this.Hide();
         }
     }

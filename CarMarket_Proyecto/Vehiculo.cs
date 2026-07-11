@@ -11,17 +11,19 @@ namespace CarMarket_Proyecto
         private string marca;
         private string modelo;
         private int año;
+        private string tipoCarro;
         private double precioOriginal;
         private double precioVenta;
         private double kilometraje;
         private string color;
         private string detalles;
 
-        public Vehiculo(string marca, string modelo, int año, double precioOriginal, double precioVenta, double kilometraje, string color, string detalles)
+        public Vehiculo(string marca, string modelo, int año,string tipoCarro, double precioOriginal, double precioVenta, double kilometraje, string color, string detalles)
         {
             this.marca = marca;
             this.modelo = modelo;
             this.año = año;
+            this.tipoCarro = tipoCarro;
             this.precioOriginal = precioOriginal;
             this.precioVenta = precioVenta;
             this.kilometraje = kilometraje;
@@ -33,6 +35,7 @@ namespace CarMarket_Proyecto
         public string GetMarca() { return marca; }
         public string GetModelo() { return modelo; }
         public int GetAño() { return año; }
+        public string GetTipoCarro() { return tipoCarro;  }
         public double GetPrecioOriginal() { return precioOriginal; }
         public double GetPrecioVenta() { return precioVenta; }
         public double GetKilometraje() { return kilometraje; }
@@ -43,6 +46,7 @@ namespace CarMarket_Proyecto
         public void SetMarca(string marca) { this.marca = marca; }
         public void SetModelo(string modelo) { this.modelo = modelo; }
         public void SetAño(int año) { this.año = año; }
+        public void SetTipoCarro(string tipoCarro) { this.tipoCarro = tipoCarro; }
         public void SetPrecioOriginal(double precioOriginal) { this.precioOriginal = precioOriginal; }
         public void SetPrecioVenta(double precioVenta) { this.precioVenta = precioVenta; }
         public void SetKilometraje(double kilometraje) { this.kilometraje = kilometraje; }

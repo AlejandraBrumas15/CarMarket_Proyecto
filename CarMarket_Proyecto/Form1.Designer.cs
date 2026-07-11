@@ -41,8 +41,11 @@
             this.lkRegistrar = new System.Windows.Forms.LinkLabel();
             this.pbClose = new System.Windows.Forms.PictureBox();
             this.pbMaximizar = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaximizar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btIniciar
@@ -50,28 +53,32 @@
             this.btIniciar.BackColor = System.Drawing.Color.PaleGreen;
             this.btIniciar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btIniciar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btIniciar.Location = new System.Drawing.Point(265, 350);
+            this.btIniciar.Location = new System.Drawing.Point(273, 399);
             this.btIniciar.Name = "btIniciar";
             this.btIniciar.Size = new System.Drawing.Size(131, 45);
             this.btIniciar.TabIndex = 0;
             this.btIniciar.Text = "Iniciar Sesión";
             this.btIniciar.UseVisualStyleBackColor = false;
+            this.btIniciar.Click += new System.EventHandler(this.btIniciar_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(198, 51);
+            this.label1.Location = new System.Drawing.Point(206, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 25);
+            this.label1.Size = new System.Drawing.Size(187, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Bienvenido a CarMarket";
+            this.label1.Text = "Bienvenido a Car";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(151, 86);
+            this.label2.Location = new System.Drawing.Point(159, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(382, 16);
             this.label2.TabIndex = 2;
@@ -81,7 +88,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(265, 138);
+            this.label3.Location = new System.Drawing.Point(273, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 23);
             this.label3.TabIndex = 3;
@@ -90,8 +97,9 @@
             // lb
             // 
             this.lb.AutoSize = true;
+            this.lb.BackColor = System.Drawing.Color.Transparent;
             this.lb.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb.Location = new System.Drawing.Point(133, 197);
+            this.lb.Location = new System.Drawing.Point(141, 246);
             this.lb.Name = "lb";
             this.lb.Size = new System.Drawing.Size(79, 19);
             this.lb.TabIndex = 4;
@@ -100,8 +108,9 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(104, 246);
+            this.label5.Location = new System.Drawing.Point(112, 295);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(108, 19);
             this.label5.TabIndex = 5;
@@ -110,7 +119,7 @@
             // txtNombreI
             // 
             this.txtNombreI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreI.Location = new System.Drawing.Point(231, 197);
+            this.txtNombreI.Location = new System.Drawing.Point(239, 246);
             this.txtNombreI.Name = "txtNombreI";
             this.txtNombreI.Size = new System.Drawing.Size(206, 26);
             this.txtNombreI.TabIndex = 6;
@@ -118,7 +127,7 @@
             // txtContraseñaI
             // 
             this.txtContraseñaI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContraseñaI.Location = new System.Drawing.Point(231, 246);
+            this.txtContraseñaI.Location = new System.Drawing.Point(239, 295);
             this.txtContraseñaI.Name = "txtContraseñaI";
             this.txtContraseñaI.Size = new System.Drawing.Size(206, 26);
             this.txtContraseñaI.TabIndex = 7;
@@ -127,7 +136,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(151, 312);
+            this.label6.Location = new System.Drawing.Point(159, 361);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(269, 14);
             this.label6.TabIndex = 8;
@@ -136,13 +145,15 @@
             // lkRegistrar
             // 
             this.lkRegistrar.AutoSize = true;
+            this.lkRegistrar.BackColor = System.Drawing.Color.Transparent;
             this.lkRegistrar.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lkRegistrar.Location = new System.Drawing.Point(426, 313);
+            this.lkRegistrar.Location = new System.Drawing.Point(434, 362);
             this.lkRegistrar.Name = "lkRegistrar";
             this.lkRegistrar.Size = new System.Drawing.Size(82, 13);
             this.lkRegistrar.TabIndex = 9;
             this.lkRegistrar.TabStop = true;
             this.lkRegistrar.Text = "Regístrate aquí";
+            this.lkRegistrar.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkRegistrar_LinkClicked);
             // 
             // pbClose
             // 
@@ -169,12 +180,39 @@
             this.pbMaximizar.TabStop = false;
             this.pbMaximizar.Click += new System.EventHandler(this.pbMaximizar_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(256, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(172, 107);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Blue;
+            this.label4.Location = new System.Drawing.Point(387, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 25);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Market";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(677, 450);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(679, 512);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.pbMaximizar);
             this.Controls.Add(this.pbClose);
             this.Controls.Add(this.lkRegistrar);
@@ -186,7 +224,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btIniciar);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Inicio de Sesión";
@@ -195,6 +233,7 @@
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaximizar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,6 +253,8 @@
         private System.Windows.Forms.LinkLabel lkRegistrar;
         private System.Windows.Forms.PictureBox pbClose;
         private System.Windows.Forms.PictureBox pbMaximizar;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label4;
     }
 }
 
