@@ -190,42 +190,41 @@ namespace CarMarket_Proyecto
         }
 
         private void btFiltrar_Click(object sender, EventArgs e)
+{
+    string marca = cbMarcaC.Text;
+    string tipo = cbTipoC.Text;
+
+    int? año = null;
+    if (!string.IsNullOrWhiteSpace(cbAñoC.Text))
+    {
+        int añoConvertido;
+        if (int.TryParse(cbAñoC.Text, out añoConvertido))
         {
-            string marca = cbMarcaC.Text;
-            string tipo = cbTipoC.Text;
+            año = añoConvertido;
+        }
+    }
 
-            int? año = null;
-            if (!string.IsNullOrWhiteSpace(cbAñoC.Text))
-            {
-                int añoConvertido;
-                if (int.TryParse(cbAñoC.Text, out añoConvertido))
-                {
-                    año = añoConvertido;
-                }
-            }
+    double? precio = null;
 
-            double? precio = null;
-            if (!string.IsNullOrWhiteSpace(cbPrecioC.Text))
-            {
-                double precioConvertido;
-                if (double.TryParse(cbPrecioC.Text, out precioConvertido))
-                {
-                    precio = precioConvertido;
-                }
-            }
-            BusquedaVehiculos buscador = new BusquedaVehiculos();
+    if (!string.IsNullOrWhiteSpace(cbPrecioC.Text))
+    {
+        string[] partes = cbPrecioC.Text.Split('-');
 
-            precio = buscador.ConvertirPrecio(cbPrecioC.Text);
+        if (partes.Length == 2)
+        {
+            precio = ConvertirPrecio(partes[1]);
+        }
+    }
 
-            List<Publicacion> resultado =
-                buscador.BuscarPublicaciones(
-                    DatosTemporales.ListaPublicaciones,
-                    marca,
-                    tipo,
-                    año,
-                    precio);
+    List<Publicacion> resultados = BuscarPublicaciones(
+        DatosTemporales.ListaPublicaciones,
+        marca,
+        tipo,
+        año,
+        precio);
 
-                MostrarPublicaciones(resultado);
+    MostrarPublicaciones(resultados);
+}
 
 if (resultado.Count == 0)
 {
