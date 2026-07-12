@@ -99,6 +99,7 @@ namespace CarMarket_Proyecto
             string telefono = txtNumR.Text;
             string contraseña = txtContraseñaR.Text;
             Usuario nuevoUsuario = new Usuario(nombre, edad, email, telefono, contraseña);
+            DatosTemporales.UsuarioActual = nuevoUsuario;
 
             MessageBox.Show("Usuario registrado: " + nuevoUsuario.GetNombre());
 
