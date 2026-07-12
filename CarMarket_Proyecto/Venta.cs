@@ -114,9 +114,14 @@ namespace CarMarket_Proyecto
 
             Vehiculo nuevoVehiculo = new Vehiculo(marca, txtModelo.Text, año, tipo,  precioOriginal, precioVenta, kilometraje, txtColor.Text, txtDetalles.Text);
 
-            // (esto lo reemplazo por la base de datos) Publicacion nuevaPublicacion = new Publicacion(DatosTemporales.UsuarioActual, nuevoVehiculo, DateTime.Now, txtDetalles.Text, true);
-
-            // esto tambien base de datos DatosTemporales.ListaPublicaciones.Add(nuevaPublicacion);
+            Publicacion nuevaPublicacion = new Publicacion(
+              DatosTemporales.UsuarioActual,
+              nuevoVehiculo,
+              DateTime.Now,
+              txtDetalles.Text,
+              true);
+              
+            DatosTemporales.ListaPublicaciones.Add(nuevaPublicacion);
 
             MessageBox.Show("Vehículo publicado con éxito");
 
