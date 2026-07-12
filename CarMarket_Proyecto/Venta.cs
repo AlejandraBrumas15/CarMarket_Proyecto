@@ -91,6 +91,8 @@ namespace CarMarket_Proyecto
                 }
             }
         }
+        //hasta aqui
+
 
         private void pbVolver_Click(object sender, EventArgs e)
         {
@@ -98,5 +100,41 @@ namespace CarMarket_Proyecto
             pantallaInicio.Show();
             this.Hide();
         }
+
+        private void btPublicar_Click(object sender, EventArgs e)
+        {
+           
+            string marca = cbMarca.Text;      // ComboBox
+            string tipo = cbTipo.Text;        // ComboBox
+            int año = int.Parse(cbAño.Text);  // ComboBox, convertido a número
+
+            double precioOriginal = double.Parse(txtPrecioOriginal.Text);
+            double precioVenta = double.Parse(txtPrecioVenta.Text);
+            double kilometraje = double.Parse(txtKilometro.Text);
+
+            Vehiculo nuevoVehiculo = new Vehiculo(marca, txtModelo.Text, año, tipo,  precioOriginal, precioVenta, kilometraje, txtColor.Text, txtDetalles.Text);
+
+            // (esto lo reemplazo por la base de datos) Publicacion nuevaPublicacion = new Publicacion(DatosTemporales.UsuarioActual, nuevoVehiculo, DateTime.Now, txtDetalles.Text, true);
+
+            // esto tambien base de datos DatosTemporales.ListaPublicaciones.Add(nuevaPublicacion);
+
+            MessageBox.Show("Vehículo publicado con éxito");
+
+            LimpiarCampos();
+        }
+
+        private void LimpiarCampos()
+        {
+            cbTipo.SelectedIndex = -1;
+            cbMarca.SelectedIndex = -1;
+            txtModelo.Clear();
+            cbAño.SelectedIndex = -1;
+            txtPrecioOriginal.Clear();
+            txtPrecioVenta.Clear();
+            txtKilometro.Clear();
+            txtColor.Clear();
+            txtDetalles.Clear();
+        }
+    }
     }
 }

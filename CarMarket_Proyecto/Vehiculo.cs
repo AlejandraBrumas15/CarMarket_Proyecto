@@ -18,7 +18,7 @@ namespace CarMarket_Proyecto
         private string color;
         private string detalles;
 
-        public Vehiculo(string marca, string modelo, int año,string tipoCarro, double precioOriginal, double precioVenta, double kilometraje, string color, string detalles)
+        public Vehiculo(string marca, string modelo, int año, string tipoCarro, double precioOriginal, double precioVenta, double kilometraje, string color, string detalles)
         {
             this.marca = marca;
             this.modelo = modelo;
@@ -35,7 +35,7 @@ namespace CarMarket_Proyecto
         public string GetMarca() { return marca; }
         public string GetModelo() { return modelo; }
         public int GetAño() { return año; }
-        public string GetTipoCarro() { return tipoCarro;  }
+        public string GetTipoCarro() { return tipoCarro; }
         public double GetPrecioOriginal() { return precioOriginal; }
         public double GetPrecioVenta() { return precioVenta; }
         public double GetKilometraje() { return kilometraje; }
@@ -56,12 +56,54 @@ namespace CarMarket_Proyecto
         // Método que calcula el precio de mercado según la devaluación por años
         public double CalcularPrecioDevaluado()
         {
+
             int añosTranscurridos = DateTime.Now.Year - año;
-            double tasaDevaluacionAnual = 0.10; // 10% por año
+            double precioActual = precioOriginal;
 
-            double precioDevaluado = precioOriginal * Math.Pow((1 - tasaDevaluacionAnual), añosTranscurridos);
+            for (int i = 1; i <= añosTranscurridos; i++)
+            {
+                double tasaDevaluacion;
 
-            return precioDevaluado;
+                if (i == 1)
+                {
+                    tasaDevaluacion = 0.20; // primer año: 20%
+                }
+                else if (i >= 2 && i <= 5)
+                {
+                    tasaDevaluacion = 0.15; // años 2 al 5: 15% anual
+                }
+                else
+                {
+                    tasaDevaluacion = 0.10; // año 6 en adelante: 10% anual
+                }
+
+                precioActual = precioActual * (1 - tasaDevaluacion);
+            }
+
+            return precioActual;
+        }
+
+        // Determina si el precio pedido supera el 15% del precio de mercado
+        public bool EsPosibleEstafa()
+        {
+            double precioMercado = CalcularPrecioDevaluado();
+            double limitePermitido = precioMercado * 1.15;
+
+            return precioVenta > limitePermitido;
+        }
+
+        // Devuelve un mensaje para mostrar en pantalla según el resultado de EsPosibleEstafa()
+        public string ObtenerMensajeEstafa()
+        {
+            if (EsPosibleEstafa())
+            {
+                return "este precio es mucho mayor al valor real de mercado, podría tratarse de una estafa.";
+            }
+            else
+            {
+                return "Precio dentro del rango normal del mercado.";
+            }
+
         }
     }
 }

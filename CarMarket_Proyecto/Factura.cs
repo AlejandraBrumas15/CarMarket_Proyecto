@@ -16,10 +16,13 @@ namespace CarMarket_Proyecto
     {
         private float anchoOriginal;
         private float altoOriginal;
+        public Publicacion PublicacionRecibida { get; set; }
+
         public Factura()
         {
             InitializeComponent();
         }
+
 
         // desde aqui el codigo se encarga de minimizar, y cerrar y aparte mantener el tamaño en caso de que se minimice y se maximice la ventana
         private void pbClose_Click(object sender, EventArgs e)
@@ -43,6 +46,14 @@ namespace CarMarket_Proyecto
         {
             anchoOriginal = this.ClientSize.Width;
             altoOriginal = this.ClientSize.Height;
+
+            lvFactura.Items.Clear();
+
+            lvFactura.Items.Add("Marca: " + PublicacionRecibida.GetVehiculo().GetMarca());
+            lvFactura.Items.Add("Modelo: " + PublicacionRecibida.GetVehiculo().GetModelo());
+            lvFactura.Items.Add("Año: " + PublicacionRecibida.GetVehiculo().GetAño());
+            lvFactura.Items.Add("Precio: " + PublicacionRecibida.GetVehiculo().GetPrecioVenta());
+            lvFactura.Items.Add("Vendedor: " + PublicacionRecibida.GetVendedor().GetNombre());
         }
 
         private void Factura_Resize(object sender, EventArgs e)

@@ -92,7 +92,7 @@ namespace CarMarket_Proyecto
             }
         }
 
-        
+        // acciones del boton iniciar y registrar
 
         private void btIniciar_Click(object sender, EventArgs e)
         {

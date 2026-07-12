@@ -36,17 +36,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtDetalles = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.tbPrecioVenta = new System.Windows.Forms.TextBox();
+            this.txtPrecioVenta = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.tbColor = new System.Windows.Forms.TextBox();
-            this.tbPrecioInicial = new System.Windows.Forms.TextBox();
+            this.txtColor = new System.Windows.Forms.TextBox();
+            this.txtPrecioOriginal = new System.Windows.Forms.TextBox();
             this.cbTipo = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cbAño = new System.Windows.Forms.ComboBox();
-            this.tbKilometro = new System.Windows.Forms.TextBox();
-            this.tbModelo = new System.Windows.Forms.TextBox();
+            this.txtKilometro = new System.Windows.Forms.TextBox();
+            this.txtModelo = new System.Windows.Forms.TextBox();
             this.cbMarca = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -146,17 +146,17 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.txtDetalles);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.tbPrecioVenta);
+            this.groupBox1.Controls.Add(this.txtPrecioVenta);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.tbColor);
-            this.groupBox1.Controls.Add(this.tbPrecioInicial);
+            this.groupBox1.Controls.Add(this.txtColor);
+            this.groupBox1.Controls.Add(this.txtPrecioOriginal);
             this.groupBox1.Controls.Add(this.cbTipo);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.cbAño);
-            this.groupBox1.Controls.Add(this.tbKilometro);
-            this.groupBox1.Controls.Add(this.tbModelo);
+            this.groupBox1.Controls.Add(this.txtKilometro);
+            this.groupBox1.Controls.Add(this.txtModelo);
             this.groupBox1.Controls.Add(this.cbMarca);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
@@ -171,13 +171,13 @@
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             // 
-            // textBox6
+            // txtDetalles
             // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(14, 334);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(447, 22);
-            this.textBox6.TabIndex = 39;
+            this.txtDetalles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDetalles.Location = new System.Drawing.Point(14, 334);
+            this.txtDetalles.Name = "txtDetalles";
+            this.txtDetalles.Size = new System.Drawing.Size(447, 22);
+            this.txtDetalles.TabIndex = 39;
             // 
             // label14
             // 
@@ -191,13 +191,13 @@
             this.label14.TabIndex = 38;
             this.label14.Text = "Descripcción extra del vehículo*";
             // 
-            // tbPrecioVenta
+            // txtPrecioVenta
             // 
-            this.tbPrecioVenta.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbPrecioVenta.Location = new System.Drawing.Point(270, 265);
-            this.tbPrecioVenta.Name = "tbPrecioVenta";
-            this.tbPrecioVenta.Size = new System.Drawing.Size(121, 20);
-            this.tbPrecioVenta.TabIndex = 37;
+            this.txtPrecioVenta.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPrecioVenta.Location = new System.Drawing.Point(270, 265);
+            this.txtPrecioVenta.Name = "txtPrecioVenta";
+            this.txtPrecioVenta.Size = new System.Drawing.Size(121, 20);
+            this.txtPrecioVenta.TabIndex = 37;
             // 
             // label13
             // 
@@ -211,20 +211,20 @@
             this.label13.TabIndex = 36;
             this.label13.Text = "Precio de venta deseado*";
             // 
-            // tbColor
+            // txtColor
             // 
-            this.tbColor.Location = new System.Drawing.Point(9, 265);
-            this.tbColor.Name = "tbColor";
-            this.tbColor.Size = new System.Drawing.Size(121, 20);
-            this.tbColor.TabIndex = 35;
+            this.txtColor.Location = new System.Drawing.Point(9, 265);
+            this.txtColor.Name = "txtColor";
+            this.txtColor.Size = new System.Drawing.Size(121, 20);
+            this.txtColor.TabIndex = 35;
             // 
-            // tbPrecioInicial
+            // txtPrecioOriginal
             // 
-            this.tbPrecioInicial.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbPrecioInicial.Location = new System.Drawing.Point(270, 196);
-            this.tbPrecioInicial.Name = "tbPrecioInicial";
-            this.tbPrecioInicial.Size = new System.Drawing.Size(121, 20);
-            this.tbPrecioInicial.TabIndex = 34;
+            this.txtPrecioOriginal.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPrecioOriginal.Location = new System.Drawing.Point(270, 196);
+            this.txtPrecioOriginal.Name = "txtPrecioOriginal";
+            this.txtPrecioOriginal.Size = new System.Drawing.Size(121, 20);
+            this.txtPrecioOriginal.TabIndex = 34;
             // 
             // cbTipo
             // 
@@ -287,19 +287,19 @@
             this.cbAño.Size = new System.Drawing.Size(121, 21);
             this.cbAño.TabIndex = 31;
             // 
-            // tbKilometro
+            // txtKilometro
             // 
-            this.tbKilometro.Location = new System.Drawing.Point(10, 196);
-            this.tbKilometro.Name = "tbKilometro";
-            this.tbKilometro.Size = new System.Drawing.Size(121, 20);
-            this.tbKilometro.TabIndex = 30;
+            this.txtKilometro.Location = new System.Drawing.Point(10, 196);
+            this.txtKilometro.Name = "txtKilometro";
+            this.txtKilometro.Size = new System.Drawing.Size(121, 20);
+            this.txtKilometro.TabIndex = 30;
             // 
-            // tbModelo
+            // txtModelo
             // 
-            this.tbModelo.Location = new System.Drawing.Point(6, 136);
-            this.tbModelo.Name = "tbModelo";
-            this.tbModelo.Size = new System.Drawing.Size(121, 20);
-            this.tbModelo.TabIndex = 29;
+            this.txtModelo.Location = new System.Drawing.Point(6, 136);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(121, 20);
+            this.txtModelo.TabIndex = 29;
             // 
             // cbMarca
             // 
@@ -315,12 +315,9 @@
             "Ford",
             "Mitsubishi",
             "Mazda",
-            "Subaru",
-            "Volvo",
             "Audi",
             "Mercedes",
-            "Bmw",
-            "Geely"});
+            "Bmw"});
             this.cbMarca.Location = new System.Drawing.Point(6, 76);
             this.cbMarca.Name = "cbMarca";
             this.cbMarca.Size = new System.Drawing.Size(121, 21);
@@ -358,9 +355,9 @@
             this.label9.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label9.Location = new System.Drawing.Point(269, 177);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(166, 16);
+            this.label9.Size = new System.Drawing.Size(178, 16);
             this.label9.TabIndex = 25;
-            this.label9.Text = "Precio inicial de compra*";
+            this.label9.Text = "Precio original de compra*";
             // 
             // label8
             // 
@@ -510,6 +507,7 @@
             this.btPublicar.TabIndex = 23;
             this.btPublicar.Text = "Publicar vehículo";
             this.btPublicar.UseVisualStyleBackColor = false;
+            this.btPublicar.Click += new System.EventHandler(this.btPublicar_Click);
             // 
             // pbMaximizar
             // 
@@ -614,17 +612,17 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cbMarca;
-        private System.Windows.Forms.TextBox tbPrecioInicial;
+        private System.Windows.Forms.TextBox txtPrecioOriginal;
         private System.Windows.Forms.ComboBox cbTipo;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cbAño;
-        private System.Windows.Forms.TextBox tbKilometro;
-        private System.Windows.Forms.TextBox tbModelo;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtKilometro;
+        private System.Windows.Forms.TextBox txtModelo;
+        private System.Windows.Forms.TextBox txtDetalles;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox tbPrecioVenta;
+        private System.Windows.Forms.TextBox txtPrecioVenta;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox tbColor;
+        private System.Windows.Forms.TextBox txtColor;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;

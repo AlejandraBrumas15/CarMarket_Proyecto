@@ -40,6 +40,19 @@ namespace CarMarket_Proyecto
         {
             anchoOriginal = this.ClientSize.Width;
             altoOriginal = this.ClientSize.Height;
+
+            DataGridViewCheckBoxColumn columnaCheck = new DataGridViewCheckBoxColumn();
+            columnaCheck.Name = "Seleccionar";
+            columnaCheck.HeaderText = "";
+            dtgCompra.Columns.Add(columnaCheck);
+
+            dtgCompra.Columns.Add("Marca", "Marca");
+            dtgCompra.Columns.Add("Modelo", "Modelo");
+            dtgCompra.Columns.Add("Año", "Año");
+            dtgCompra.Columns.Add("PrecioVenta", "Precio Vendedor");
+            dtgCompra.Columns.Add("PrecioMercado", "Precio Mercado");
+            dtgCompra.Columns.Add("Estafa", "Advertencia");
+
         }
 
         private void Compra_Resize(object sender, EventArgs e)
@@ -90,10 +103,90 @@ namespace CarMarket_Proyecto
             }
         }
 
+        //metodos de mostrar en el gridview 
+        private void MostrarPublicaciones(List<Publicacion> publicaciones)
+        {
+            dtgCompra.Rows.Clear();
+
+            foreach (Publicacion pub in publicaciones)
+            {
+                if (pub.GetDisponible())
+                {
+                    
+                        int indice = dtgCompra.Rows.Add(
+                false,
+                        pub.GetVehiculo().GetMarca(),
+                        pub.GetVehiculo().GetModelo(),
+                        pub.GetVehiculo().GetAño(),
+                        pub.GetVehiculo().GetPrecioVenta(),
+                        pub.GetVehiculo().CalcularPrecioDevaluado(),
+                        pub.GetVehiculo().ObtenerMensajeEstafa()
+                    );
+                    dtgCompra.Rows[indice].Tag = pub; // guarda el objeto completo en esa fila
+                }
+            }
+        }
+
+
+
         private void pbVolver_Click(object sender, EventArgs e)
         {
             PantallaInicio pantallaInicio = new PantallaInicio();
             pantallaInicio.Show();
+            this.Hide();
+        }
+
+        private void btFiltrar_Click(object sender, EventArgs e)
+        {
+            string marca = cbMarcaC.Text;
+            string tipo = cbTipoC.Text;
+
+            int? año = null;
+            if (!string.IsNullOrWhiteSpace(cbAñoC.Text))
+            {
+                int añoConvertido;
+                if (int.TryParse(cbAñoC.Text, out añoConvertido))
+                {
+                    año = añoConvertido;
+                }
+            }
+
+            double? precio = null;
+            if (!string.IsNullOrWhiteSpace(cbPrecioC.Text))
+            {
+                double precioConvertido;
+                if (double.TryParse(cbPrecioC.Text, out precioConvertido))
+                {
+                    precio = precioConvertido;
+                }
+            }
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Publicacion publicacionSeleccionada = null;
+
+            foreach (DataGridViewRow fila in dtgCompra.Rows)
+            {
+                bool estaMarcado = Convert.ToBoolean(fila.Cells["Seleccionar"].Value);
+
+                if (estaMarcado)
+                {
+                    publicacionSeleccionada = (Publicacion)fila.Tag;
+                    break;
+                }
+            }
+
+            if (publicacionSeleccionada == null)
+            {
+                MessageBox.Show("Selecciona un vehículo antes de continuar");
+                return;
+            }
+
+            Factura formFactura = new Factura(publicacionSeleccionada); // pasas la publicación al constructor
+            formFactura.Show();
             this.Hide();
         }
     }

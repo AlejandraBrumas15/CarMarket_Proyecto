@@ -35,6 +35,12 @@ namespace CarMarket_Proyecto
         public void SetVehiculo(Vehiculo vehiculo) { this.vehiculo = vehiculo; }
         public void SetDescripcion(string descripcion) { this.descripcion = descripcion; }
         public void SetDisponible(bool disponible) { this.disponible = disponible; }
+    
+
+    public void MarcarComoVendido()
+        {
+            disponible = false;
+        }
     }
 }
 

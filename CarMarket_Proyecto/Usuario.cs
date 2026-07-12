@@ -36,5 +36,10 @@ namespace CarMarket_Proyecto
         public void SetEmail(string email) { this.email = email; }
         public void SetTelefono(string telefono) { this.telefono = telefono; }
         public void SetContraseña(string contraseña) { this.contraseña = contraseña; }
+
+        public bool ValidarCredenciales(string email, string contraseña)
+        {
+            return this.email == email && this.contraseña == contraseña;
+        }
     }
 }
