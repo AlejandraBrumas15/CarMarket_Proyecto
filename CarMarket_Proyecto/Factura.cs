@@ -48,13 +48,22 @@ namespace CarMarket_Proyecto
             anchoOriginal = this.ClientSize.Width;
             altoOriginal = this.ClientSize.Height;
 
+            lvFactura.View = View.List;
+
             lvFactura.Items.Clear();
 
             lvFactura.Items.Add("Marca: " + PublicacionRecibida.GetVehiculo().GetMarca());
             lvFactura.Items.Add("Modelo: " + PublicacionRecibida.GetVehiculo().GetModelo());
             lvFactura.Items.Add("Año: " + PublicacionRecibida.GetVehiculo().GetAño());
             lvFactura.Items.Add("Precio: " + PublicacionRecibida.GetVehiculo().GetPrecioVenta());
+            if (PublicacionRecibida.GetVendedor() != null)
+        {
             lvFactura.Items.Add("Vendedor: " + PublicacionRecibida.GetVendedor().GetNombre());
+        }
+            else
+        {
+            lvFactura.Items.Add("Vendedor: No disponible");
+            }
         }
 
         private void Factura_Resize(object sender, EventArgs e)
