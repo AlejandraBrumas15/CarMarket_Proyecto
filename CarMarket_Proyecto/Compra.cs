@@ -129,6 +129,57 @@ namespace CarMarket_Proyecto
             }
         }
 
+        private double? ConvertirPrecio(string texto)
+{
+    if (string.IsNullOrWhiteSpace(texto))
+        return null;
+
+    texto = texto.Replace("$", "").Trim();
+
+    double precio;
+
+    if (double.TryParse(texto, out precio))
+        return precio;
+
+    return null;
+}
+
+        private List<Publicacion> BuscarPublicaciones(List<Publicacion> publicaciones,
+                                              string marca,
+                                              string tipo,
+                                              int? año,
+                                              double? precioMaximo)
+{
+    List<Publicacion> resultado = new List<Publicacion>();
+
+    foreach (Publicacion pub in publicaciones)
+    {
+        Vehiculo vehiculo = pub.GetVehiculo();
+
+        if (!pub.GetDisponible())
+            continue;
+
+        if (!string.IsNullOrWhiteSpace(marca) &&
+            vehiculo.GetMarca() != marca)
+            continue;
+
+        if (!string.IsNullOrWhiteSpace(tipo) &&
+            vehiculo.GetTipoCarro() != tipo)
+            continue;
+
+        if (año.HasValue &&
+            vehiculo.GetAño() != año.Value)
+            continue;
+
+        if (precioMaximo.HasValue &&
+            vehiculo.GetPrecioVenta() > precioMaximo.Value)
+            continue;
+
+        resultado.Add(pub);
+    }
+
+    return resultado;
+}
 
 
         private void pbVolver_Click(object sender, EventArgs e)
