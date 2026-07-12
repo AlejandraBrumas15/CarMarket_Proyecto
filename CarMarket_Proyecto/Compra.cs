@@ -52,6 +52,8 @@ namespace CarMarket_Proyecto
             dtgCompra.Columns.Add("PrecioVenta", "Precio Vendedor");
             dtgCompra.Columns.Add("PrecioMercado", "Precio Mercado");
             dtgCompra.Columns.Add("Estafa", "Advertencia");
+            MostrarPublicaciones(DatosTemporales.ListaPublicaciones);
+            dtgCompra.CellContentClick += dtgCompra_CellContentClick;
 
         }
 
@@ -160,7 +162,24 @@ namespace CarMarket_Proyecto
                     precio = precioConvertido;
                 }
             }
+            BusquedaVehiculos buscador = new BusquedaVehiculos();
 
+            precio = buscador.ConvertirPrecio(cbPrecioC.Text);
+
+            List<Publicacion> resultado =
+                buscador.BuscarPublicaciones(
+                    DatosTemporales.ListaPublicaciones,
+                    marca,
+                    tipo,
+                    año,
+                    precio);
+
+                MostrarPublicaciones(resultado);
+
+if (resultado.Count == 0)
+{
+    MessageBox.Show("No se encontraron vehículos.");
+}
 
         }
 
@@ -190,4 +209,17 @@ namespace CarMarket_Proyecto
             this.Hide();
         }
     }
+    private void dtgCompra_CellContentClick(object sender, DataGridViewCellEventArgs e)
+{
+    if (e.ColumnIndex == dtgCompra.Columns["Seleccionar"].Index && e.RowIndex >= 0)
+    {
+        foreach (DataGridViewRow fila in dtgCompra.Rows)
+        {
+            if (fila.Index != e.RowIndex)
+            {
+                fila.Cells["Seleccionar"].Value = false;
+            }
+        }
+    }
+}
 }
