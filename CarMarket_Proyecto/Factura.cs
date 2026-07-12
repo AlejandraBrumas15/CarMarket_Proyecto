@@ -18,10 +18,11 @@ namespace CarMarket_Proyecto
         private float altoOriginal;
         public Publicacion PublicacionRecibida { get; set; }
 
-        public Factura()
-        {
-            InitializeComponent();
-        }
+        public Factura(Publicacion publicacion)
+{
+    InitializeComponent();
+    PublicacionRecibida = publicacion;
+}
 
 
         // desde aqui el codigo se encarga de minimizar, y cerrar y aparte mantener el tamaño en caso de que se minimice y se maximice la ventana
