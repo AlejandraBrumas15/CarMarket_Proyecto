@@ -129,6 +129,10 @@ namespace CarMarket_Proyecto
         MessageBox.Show("No existe una publicación para comprar.");
         return;
     }
+    private void button1_Click(object sender, EventArgs e)
+{
+    if (PublicacionRecibida != null)
+    {
 
     PublicacionRecibida.MarcarComoVendido();
 
