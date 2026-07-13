@@ -141,5 +141,4 @@ namespace CarMarket_Proyecto
             txtDetalles.Clear();
         }
     }
-    }
 }

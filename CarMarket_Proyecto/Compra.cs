@@ -114,72 +114,72 @@ namespace CarMarket_Proyecto
             {
                 if (pub.GetDisponible())
                 {
-                    
-                        int indice = dtgCompra.Rows.Add(
-                false,
-                        pub.GetVehiculo().GetMarca(),
-                        pub.GetVehiculo().GetModelo(),
-                        pub.GetVehiculo().GetAño(),
-                        pub.GetVehiculo().GetPrecioVenta(),
-                        pub.GetVehiculo().CalcularPrecioDevaluado(),
-                        pub.GetVehiculo().ObtenerMensajeEstafa()
-                    );
+
+                    int indice = dtgCompra.Rows.Add(
+            false,
+                    pub.GetVehiculo().GetMarca(),
+                    pub.GetVehiculo().GetModelo(),
+                    pub.GetVehiculo().GetAño(),
+                    pub.GetVehiculo().GetPrecioVenta(),
+                    pub.GetVehiculo().CalcularPrecioDevaluado(),
+                    pub.GetVehiculo().ObtenerMensajeEstafa()
+                );
                     dtgCompra.Rows[indice].Tag = pub; // guarda el objeto completo en esa fila
                 }
             }
         }
 
         private double? ConvertirPrecio(string texto)
-{
-    if (string.IsNullOrWhiteSpace(texto))
-        return null;
+        {
+            if (string.IsNullOrWhiteSpace(texto))
+                return null;
 
-    texto = texto.Replace("$", "").Trim();
+            texto = texto.Replace("$", "").Trim();
 
-    double precio;
+            double precio;
 
-    if (double.TryParse(texto, out precio))
-        return precio;
+            if (double.TryParse(texto, out precio))
+                return precio;
 
-    return null;
-}
+            return null;
+        }
 
         private List<Publicacion> BuscarPublicaciones(List<Publicacion> publicaciones,
                                               string marca,
                                               string tipo,
                                               int? año,
                                               double? precioMaximo)
-{
-    List<Publicacion> resultado = new List<Publicacion>();
+        {
+            List<Publicacion> resultado = new List<Publicacion>();
 
-    foreach (Publicacion pub in publicaciones)
-    {
-        Vehiculo vehiculo = pub.GetVehiculo();
+            foreach (Publicacion pub in publicaciones)
+            {
+                Vehiculo vehiculo = pub.GetVehiculo();
 
-        if (!pub.GetDisponible())
-            continue;
+                if (!pub.GetDisponible())
+                    continue;
 
-        if (!string.IsNullOrWhiteSpace(marca) &&
-            vehiculo.GetMarca() != marca)
-            continue;
+                if (!string.IsNullOrWhiteSpace(marca) &&
+                    vehiculo.GetMarca() != marca)
+                    continue;
 
-        if (!string.IsNullOrWhiteSpace(tipo) &&
-            vehiculo.GetTipoCarro() != tipo)
-            continue;
+                if (!string.IsNullOrWhiteSpace(tipo) &&
+                    vehiculo.GetTipoCarro() != tipo)
+                    continue;
 
-        if (año.HasValue &&
-            vehiculo.GetAño() != año.Value)
-            continue;
+                if (año.HasValue &&
+                    vehiculo.GetAño() != año.Value)
+                    continue;
 
-        if (precioMaximo.HasValue &&
-            vehiculo.GetPrecioVenta() > precioMaximo.Value)
-            continue;
+                if (precioMaximo.HasValue &&
+                    vehiculo.GetPrecioVenta() > precioMaximo.Value)
+                    continue;
 
-        resultado.Add(pub);
-    }
+                resultado.Add(pub);
+            }
 
-    return resultado;
-}
+            return resultado;
+        }
 
 
         private void pbVolver_Click(object sender, EventArgs e)
@@ -190,47 +190,45 @@ namespace CarMarket_Proyecto
         }
 
         private void btFiltrar_Click(object sender, EventArgs e)
-{
-    string marca = cbMarcaC.Text;
-    string tipo = cbTipoC.Text;
-
-    int? año = null;
-    if (!string.IsNullOrWhiteSpace(cbAñoC.Text))
-    {
-        int añoConvertido;
-        if (int.TryParse(cbAñoC.Text, out añoConvertido))
         {
-            año = añoConvertido;
-        }
-    }
+            string marca = cbMarcaC.Text;
+            string tipo = cbTipoC.Text;
 
-    double? precio = null;
+            int? año = null;
+            if (!string.IsNullOrWhiteSpace(cbAñoC.Text))
+            {
+                int añoConvertido;
+                if (int.TryParse(cbAñoC.Text, out añoConvertido))
+                {
+                    año = añoConvertido;
+                }
+            }
 
-    if (!string.IsNullOrWhiteSpace(cbPrecioC.Text))
-    {
-        string[] partes = cbPrecioC.Text.Split('-');
+            double? precio = null;
 
-        if (partes.Length == 2)
-        {
-            precio = ConvertirPrecio(partes[1]);
-        }
-    }
+            if (!string.IsNullOrWhiteSpace(cbPrecioC.Text))
+            {
+                string[] partes = cbPrecioC.Text.Split('-');
 
-    List<Publicacion> resultados = BuscarPublicaciones(
-        DatosTemporales.ListaPublicaciones,
-        marca,
-        tipo,
-        año,
-        precio);
+                if (partes.Length == 2)
+                {
+                    precio = ConvertirPrecio(partes[1]);
+                }
+            }
 
-    MostrarPublicaciones(resultados);
-}
+            List<Publicacion> resultados = BuscarPublicaciones(
+                DatosTemporales.ListaPublicaciones,
+                marca,
+                tipo,
+                año,
+                precio);
 
-if (resultado.Count == 0)
-{
-    MessageBox.Show("No se encontraron vehículos.");
-}
+            MostrarPublicaciones(resultados);
 
+            if (resultados.Count == 0)
+            {
+                MessageBox.Show("No se encontraron vehículos.");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -258,18 +256,19 @@ if (resultado.Count == 0)
             formFactura.Show();
             this.Hide();
         }
-    }
-    private void dtgCompra_CellContentClick(object sender, DataGridViewCellEventArgs e)
-{
-    if (e.ColumnIndex == dtgCompra.Columns["Seleccionar"].Index && e.RowIndex >= 0)
-    {
-        foreach (DataGridViewRow fila in dtgCompra.Rows)
+
+        private void dtgCompra_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (fila.Index != e.RowIndex)
+            if (e.ColumnIndex == dtgCompra.Columns["Seleccionar"].Index && e.RowIndex >= 0)
             {
-                fila.Cells["Seleccionar"].Value = false;
+                foreach (DataGridViewRow fila in dtgCompra.Rows)
+                {
+                    if (fila.Index != e.RowIndex)
+                    {
+                        fila.Cells["Seleccionar"].Value = false;
+                    }
+                }
             }
         }
     }
-}
 }

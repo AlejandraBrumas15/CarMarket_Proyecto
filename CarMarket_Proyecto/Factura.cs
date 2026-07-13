@@ -123,24 +123,21 @@ namespace CarMarket_Proyecto
         }
 
     private void button1_Click(object sender, EventArgs e)
-{
-    if (PublicacionRecibida == null)
     {
-        MessageBox.Show("No existe una publicación para comprar.");
-        return;
-    }
-    private void button1_Click(object sender, EventArgs e)
-{
-    if (PublicacionRecibida != null)
-    {
+            if (PublicacionRecibida == null)
+            {
+                MessageBox.Show("No existe una publicación para comprar.");
+                return;
+            }
 
-    PublicacionRecibida.MarcarComoVendido();
+            PublicacionRecibida.MarcarComoVendido();
 
-    MessageBox.Show("¡Compra realizada con éxito!");
+            MessageBox.Show("Compra realizada con éxito.");
 
-    Compra formularioCompra = new Compra();
-    formularioCompra.Show();
+            Compra formularioCompra = new Compra();
+            formularioCompra.Show();
 
-    this.Close();
+            this.Close();
 }
+    }
 }
