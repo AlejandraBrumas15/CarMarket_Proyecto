@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -122,22 +123,94 @@ namespace CarMarket_Proyecto
             this.Close();
         }
 
-    private void button1_Click(object sender, EventArgs e)
-    {
+        private void button1_Click(object sender, EventArgs e)
+        {
             if (PublicacionRecibida == null)
             {
-                MessageBox.Show("No existe una publicación para comprar.");
+                MessageBox.Show(
+                    "No existe una publicación para comprar.",
+                    "Publicación no disponible",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
                 return;
             }
 
-            PublicacionRecibida.MarcarComoVendido();
+            if (DatosTemporales.IdUsuarioActual <= 0)
+            {
+                MessageBox.Show(
+                    "Debe iniciar sesión para realizar la compra.",
+                    "Sesión requerida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
 
-            MessageBox.Show("Compra realizada con éxito.");
+                return;
+            }
 
-            Compra formularioCompra = new Compra();
-            formularioCompra.Show();
+            try
+            {
+                using (SqlConnection conexion =
+                    ConexionBD.ObtenerConexion())
+                {
+                    using (SqlCommand comando =
+                        new SqlCommand(
+                            "dbo.sp_RegistrarCompra",
+                            conexion))
+                    {
+                        comando.CommandType =
+                            CommandType.StoredProcedure;
 
-            this.Close();
-}
+                        comando.Parameters.Add(
+                            "@IdPublicacion",
+                            SqlDbType.Int
+                        ).Value =
+                            PublicacionRecibida.GetIdPublicacion();
+
+                        comando.Parameters.Add(
+                            "@IdComprador",
+                            SqlDbType.Int
+                        ).Value =
+                            DatosTemporales.IdUsuarioActual;
+
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                    }
+                }
+
+                PublicacionRecibida.MarcarComoVendido();
+
+                MessageBox.Show(
+                    "Compra realizada correctamente.",
+                    "Compra completada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                Compra formularioCompra = new Compra();
+                formularioCompra.Show();
+                this.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "No se pudo realizar la compra",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+    "Ocurrió un error inesperado.\n\n" +
+    ex.Message,
+    "Error",
+    MessageBoxButtons.OK,
+    MessageBoxIcon.Error
+);
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace CarMarket_Proyecto
 {
     public class Publicacion
     {
+        private int idPublicacion;
         private Usuario vendedor;
         private Vehiculo vehiculo;
         private DateTime fechaPublicacion;
@@ -22,8 +23,27 @@ namespace CarMarket_Proyecto
             this.descripcion = descripcion;
             this.disponible = disponible;
         }
+        public Publicacion(
+             int idPublicacion,
+             Usuario vendedor,
+             Vehiculo vehiculo,
+             DateTime fechaPublicacion,
+             string descripcion,
+             bool disponible)
+        {
+            this.idPublicacion = idPublicacion;
+            this.vendedor = vendedor;
+            this.vehiculo = vehiculo;
+            this.fechaPublicacion = fechaPublicacion;
+            this.descripcion = descripcion;
+            this.disponible = disponible;
+        }
 
         // Get
+        public int GetIdPublicacion()
+        {
+            return idPublicacion;
+        }
         public Usuario GetVendedor() { return vendedor; }
         public Vehiculo GetVehiculo() { return vehiculo; }
         public DateTime GetFechaPublicacion() { return fechaPublicacion; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -52,7 +53,25 @@ namespace CarMarket_Proyecto
             dtgCompra.Columns.Add("PrecioVenta", "Precio Vendedor");
             dtgCompra.Columns.Add("PrecioMercado", "Precio Mercado");
             dtgCompra.Columns.Add("Estafa", "Advertencia");
-            MostrarPublicaciones(DatosTemporales.ListaPublicaciones);
+            try
+            {
+                DatosTemporales.ListaPublicaciones =
+                    ObtenerPublicacionesDesdeBD();
+
+                MostrarPublicaciones(
+                    DatosTemporales.ListaPublicaciones
+                );
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "No se pudieron cargar los vehículos.\n\n" +
+                    ex.Message,
+                    "Error de base de datos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
             dtgCompra.CellContentClick += dtgCompra_CellContentClick;
 
         }
@@ -105,6 +124,81 @@ namespace CarMarket_Proyecto
             }
         }
 
+        private List<Publicacion> ObtenerPublicacionesDesdeBD()
+        {
+            List<Publicacion> publicaciones =
+                new List<Publicacion>();
+
+            using (SqlConnection conexion =
+                ConexionBD.ObtenerConexion())
+            {
+                using (SqlCommand comando =
+                    new SqlCommand(
+                        "dbo.sp_ListarPublicaciones",
+                        conexion))
+                {
+                    comando.CommandType =
+                        CommandType.StoredProcedure;
+
+                    conexion.Open();
+
+                    using (SqlDataReader lector =
+                        comando.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            int idPublicacion =
+                                Convert.ToInt32(
+                                    lector["IdPublicacion"]);
+
+                            string nombreVendedor =
+                                lector["NombreVendedor"].ToString();
+
+                            string telefonoVendedor =
+                                lector["TelefonoVendedor"].ToString();
+
+                            Usuario vendedor = new Usuario(
+                                nombreVendedor,
+                                0,
+                                "",
+                                telefonoVendedor,
+                                ""
+                            );
+
+                            Vehiculo vehiculo = new Vehiculo(
+                                lector["Marca"].ToString(),
+                                lector["Modelo"].ToString(),
+                                Convert.ToInt32(lector["Anio"]),
+                                lector["TipoVehiculo"].ToString(),
+                                Convert.ToDouble(
+                                    lector["PrecioOriginal"]),
+                                Convert.ToDouble(
+                                    lector["PrecioVenta"]),
+                                Convert.ToDouble(
+                                    lector["Kilometraje"]),
+                                lector["Color"].ToString(),
+                                lector["Detalles"].ToString()
+                            );
+
+                            Publicacion publicacion =
+                                new Publicacion(
+                                    idPublicacion,
+                                    vendedor,
+                                    vehiculo,
+                                    Convert.ToDateTime(
+                                        lector["FechaPublicacion"]),
+                                    lector["Descripcion"].ToString(),
+                                    true
+                                );
+
+                            publicaciones.Add(publicacion);
+                        }
+                    }
+                }
+            }
+
+            return publicaciones;
+        }
         //metodos de mostrar en el gridview 
         private void MostrarPublicaciones(List<Publicacion> publicaciones)
         {
