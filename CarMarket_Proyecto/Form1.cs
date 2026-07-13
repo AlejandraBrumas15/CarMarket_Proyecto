@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace CarMarket_Proyecto
         {
             InitializeComponent();
         }
-        
+
 
         private void pbClose_Click(object sender, EventArgs e)
         {
@@ -96,12 +97,128 @@ namespace CarMarket_Proyecto
 
         private void btIniciar_Click(object sender, EventArgs e)
         {
-            PantallaInicio pantallaInicio = new PantallaInicio();
-            pantallaInicio.Show();
-            this.Hide();
+            string email = txtNombreI.Text.Trim();
+            string contraseña = txtContraseñaI.Text;
+
+            if (string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(contraseña))
+            {
+                MessageBox.Show(
+                    "Ingrese el correo y la contraseña.",
+                    "Datos incompletos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+                {
+                    using (SqlCommand comando =
+                        new SqlCommand("dbo.sp_IniciarSesion", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+
+                        comando.Parameters.Add(
+                            "@Email",
+                            SqlDbType.NVarChar,
+                            150
+                        ).Value = email;
+
+                        comando.Parameters.Add(
+                            "@Contrasena",
+                            SqlDbType.NVarChar,
+                            200
+                        ).Value = contraseña;
+
+                        conexion.Open();
+
+                        using (SqlDataReader lector = comando.ExecuteReader())
+                        {
+                            if (lector.Read())
+                            {
+                                int idUsuario =
+                                    Convert.ToInt32(lector["IdUsuario"]);
+
+                                string nombre =
+                                    lector["Nombre"].ToString();
+
+                                int edad =
+                                    Convert.ToInt32(lector["Edad"]);
+
+                                string correo =
+                                    lector["Email"].ToString();
+
+                                string telefono =
+                                    lector["Telefono"].ToString();
+
+                                DatosTemporales.IdUsuarioActual = idUsuario;
+
+                                DatosTemporales.UsuarioActual = new Usuario(
+                                    nombre,
+                                    edad,
+                                    correo,
+                                    telefono,
+                                    ""
+                                );
+
+                                MessageBox.Show(
+                                    "Bienvenido, " + nombre + ".",
+                                    "Inicio de sesión correcto",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information
+                                );
+
+                                PantallaInicio pantallaInicio =
+                                    new PantallaInicio();
+
+                                pantallaInicio.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show(
+                                    "El correo o la contraseña son incorrectos.",
+                                    "No se pudo iniciar sesión",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning
+                                );
+
+                                txtContraseñaI.Clear();
+                                txtContraseñaI.Focus();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "No se pudo consultar la base de datos.\n\n" +
+                    ex.Message,
+                    "Error de base de datos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Ocurrió un error inesperado.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
-        private void lkRegistrar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lkRegistrar_LinkClicked(
+     object sender,
+     LinkLabelLinkClickedEventArgs e)
         {
             Registro formRegistro = new Registro();
             formRegistro.Show();

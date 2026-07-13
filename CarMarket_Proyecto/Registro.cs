@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -93,19 +94,130 @@ namespace CarMarket_Proyecto
 
         private void btRegistrar_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombreR.Text;
-            int edad = int.Parse(txtEdad.Text); 
-            string email = txtEmailR.Text;
-            string telefono = txtNumR.Text;
+            string nombre = txtNombreR.Text.Trim();
+            string email = txtEmailR.Text.Trim();
+            string telefono = txtNumR.Text.Trim();
             string contraseña = txtContraseñaR.Text;
-            Usuario nuevoUsuario = new Usuario(nombre, edad, email, telefono, contraseña);
-            DatosTemporales.UsuarioActual = nuevoUsuario;
 
-            MessageBox.Show("Usuario registrado: " + nuevoUsuario.GetNombre());
+            int edad;
 
-            Form1 formLogin = new Form1();
-            formLogin.Show();
-            this.Hide();
+            if (string.IsNullOrWhiteSpace(nombre) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(telefono) ||
+                string.IsNullOrWhiteSpace(contraseña))
+            {
+                MessageBox.Show(
+                    "Debe completar todos los campos.",
+                    "Datos incompletos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            if (!int.TryParse(txtEdad.Text, out edad))
+            {
+                MessageBox.Show(
+                    "La edad debe ser un número entero.",
+                    "Edad incorrecta",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtEdad.Focus();
+                return;
+            }
+
+            if (contraseña != txtConfirmContraseña.Text)
+            {
+                MessageBox.Show(
+                    "Las contraseñas no coinciden.",
+                    "Contraseña incorrecta",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtConfirmContraseña.Clear();
+                txtConfirmContraseña.Focus();
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+                {
+                    using (SqlCommand comando =
+                        new SqlCommand("dbo.sp_RegistrarUsuario", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+
+                        comando.Parameters.Add(
+                            "@Nombre",
+                            SqlDbType.NVarChar,
+                            100
+                        ).Value = nombre;
+
+                        comando.Parameters.Add(
+                            "@Edad",
+                            SqlDbType.Int
+                        ).Value = edad;
+
+                        comando.Parameters.Add(
+                            "@Email",
+                            SqlDbType.NVarChar,
+                            150
+                        ).Value = email;
+
+                        comando.Parameters.Add(
+                            "@Telefono",
+                            SqlDbType.NVarChar,
+                            20
+                        ).Value = telefono;
+
+                        comando.Parameters.Add(
+                            "@Contrasena",
+                            SqlDbType.NVarChar,
+                            200
+                        ).Value = contraseña;
+
+                        conexion.Open();
+
+                        int idUsuario =
+                            Convert.ToInt32(comando.ExecuteScalar());
+
+                        MessageBox.Show(
+                            "Usuario registrado correctamente.\n" +
+                            "Código de usuario: " + idUsuario,
+                            "Registro completado",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                        );
+                    }
+                }
+
+                Form1 formLogin = new Form1();
+                formLogin.Show();
+                this.Hide();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "No se pudo registrar el usuario",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Ocurrió un error inesperado.\n\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
     }
 }

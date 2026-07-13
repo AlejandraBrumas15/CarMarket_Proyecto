@@ -5,6 +5,7 @@ namespace CarMarket_Proyecto
     public static class DatosTemporales
     {
         public static Usuario UsuarioActual;
+        public static int IdUsuarioActual;
 
         public static List<Publicacion> ListaPublicaciones =
             new List<Publicacion>();

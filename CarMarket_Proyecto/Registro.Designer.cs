@@ -225,6 +225,7 @@
             this.txtContraseñaR.Name = "txtContraseñaR";
             this.txtContraseñaR.Size = new System.Drawing.Size(128, 26);
             this.txtContraseñaR.TabIndex = 32;
+            this.txtContraseñaR.UseSystemPasswordChar = true;
             // 
             // label8
             // 
@@ -245,6 +246,7 @@
             this.txtConfirmContraseña.Name = "txtConfirmContraseña";
             this.txtConfirmContraseña.Size = new System.Drawing.Size(128, 26);
             this.txtConfirmContraseña.TabIndex = 34;
+            this.txtConfirmContraseña.UseSystemPasswordChar = true;
             // 
             // pictureBox1
             // 

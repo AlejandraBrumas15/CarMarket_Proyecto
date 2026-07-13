@@ -101,9 +101,9 @@
             this.lb.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb.Location = new System.Drawing.Point(141, 246);
             this.lb.Name = "lb";
-            this.lb.Size = new System.Drawing.Size(79, 19);
+            this.lb.Size = new System.Drawing.Size(70, 19);
             this.lb.TabIndex = 4;
-            this.lb.Text = "Nombre:";
+            this.lb.Text = "Correo:";
             // 
             // label5
             // 
@@ -131,6 +131,7 @@
             this.txtContraseñaI.Name = "txtContraseñaI";
             this.txtContraseñaI.Size = new System.Drawing.Size(206, 26);
             this.txtContraseñaI.TabIndex = 7;
+            this.txtContraseñaI.UseSystemPasswordChar = true;
             // 
             // label6
             // 
