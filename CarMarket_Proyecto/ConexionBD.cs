@@ -8,12 +8,18 @@ namespace CarMarket_Proyecto
     {
         public static SqlConnection ObtenerConexion()
         {
-            string cadenaConexion =
-                ConfigurationManager
-                .ConnectionStrings["CarMarketDB"]
-                .ConnectionString;
+            string cadena = Environment.GetEnvironmentVariable(
+                "CARMARKET_DB_CONNECTION"
+            );
 
-            return new SqlConnection(cadenaConexion);
+            if (string.IsNullOrWhiteSpace(cadena))
+            {
+                cadena = ConfigurationManager
+                    .ConnectionStrings["CarMarketDB"]
+                    .ConnectionString;
+            }
+
+            return new SqlConnection(cadena);
         }
 
         public static bool ProbarConexion(out string mensaje)
