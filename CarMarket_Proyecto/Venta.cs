@@ -34,6 +34,14 @@ namespace CarMarket_Proyecto
             txtPrecioVenta.KeyPress += Validaciones.Decimal_KeyPress;
             txtKilometro.KeyPress += Validaciones.Decimal_KeyPress;
             txtColor.KeyPress += Validaciones.SoloLetras_KeyPress;
+
+            txtModelo.Validating += txtModelo_Validating;
+            txtPrecioOriginal.Validating += txtPrecioOriginal_Validating;
+            txtPrecioVenta.Validating += txtPrecioVenta_Validating;
+            txtKilometro.Validating += txtKilometro_Validating;
+            txtColor.Validating += txtColor_Validating;
+            txtDetalles.Validating += txtDetalles_Validating;
+
         }
         // desde aqui el codigo se encarga de minimizar, y cerrar y aparte mantener el tamaño en caso de que se minimice y se maximice la ventana
         private void pbClose_Click(object sender, EventArgs e)
@@ -397,6 +405,66 @@ namespace CarMarket_Proyecto
             txtKilometro.Clear();
             txtColor.Clear();
             txtDetalles.Clear();
+        }
+        private void txtModelo_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validaciones.EsModeloValido(txtModelo.Text))
+            {
+                MessageBox.Show("Modelo inválido.");
+                e.Cancel = true;
+            }
+        }
+        private void txtPrecioOriginal_Validating(object sender, CancelEventArgs e)
+        {
+            decimal precio;
+
+            if (!Validaciones.TryDecimalPositivo(
+                txtPrecioOriginal.Text,
+                out precio))
+            {
+                MessageBox.Show("Precio original inválido.");
+                e.Cancel = true;
+            }
+        }
+        private void txtPrecioVenta_Validating(object sender, CancelEventArgs e)
+        {
+            decimal precio;
+
+            if (!Validaciones.TryDecimalPositivo(
+                txtPrecioVenta.Text,
+                out precio))
+            {
+                MessageBox.Show("Precio de venta inválido.");
+                e.Cancel = true;
+            }
+        }
+        private void txtKilometro_Validating(object sender, CancelEventArgs e)
+        {
+            decimal km;
+
+            if (!Validaciones.TryDecimalNoNegativo(
+                txtKilometro.Text,
+                out km))
+            {
+                MessageBox.Show("Kilometraje inválido.");
+                e.Cancel = true;
+            }
+        }
+        private void txtColor_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validaciones.EsColorValido(txtColor.Text))
+            {
+                MessageBox.Show("Color inválido.");
+                e.Cancel = true;
+            }
+        }
+        private void txtDetalles_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validaciones.EsDescripcionValida(txtDetalles.Text))
+            {
+                MessageBox.Show("La descripción debe tener entre 10 y 1000 caracteres.");
+                e.Cancel = true;
+            }
         }
     }
 }

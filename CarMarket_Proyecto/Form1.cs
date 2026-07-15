@@ -21,6 +21,8 @@ namespace CarMarket_Proyecto
             txtNombreI.MaxLength = 150;
             txtContraseñaI.MaxLength = 200;
             this.AcceptButton = btIniciar;
+            txtNombreI.Validating += txtNombreI_Validating;
+            txtContraseñaI.Validating += txtContraseñaI_Validating;
         }
 
 
@@ -252,6 +254,23 @@ namespace CarMarket_Proyecto
             Registro formRegistro = new Registro();
             formRegistro.Show();
             this.Hide();
+        }
+        private void txtNombreI_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validaciones.EsCorreoValido(txtNombreI.Text))
+            {
+                MessageBox.Show("Correo inválido.");
+                e.Cancel = true;
+            }
+        }
+
+        private void txtContraseñaI_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtContraseñaI.Text))
+            {
+                MessageBox.Show("Ingrese la contraseña.");
+                e.Cancel = true;
+            }
         }
     }
 }

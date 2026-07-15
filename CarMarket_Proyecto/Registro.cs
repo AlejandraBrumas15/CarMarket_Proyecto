@@ -18,6 +18,7 @@ namespace CarMarket_Proyecto
         public Registro()
         {
             InitializeComponent();
+
             txtNombreR.MaxLength = 100;
             txtEdad.MaxLength = 3;
             txtEmailR.MaxLength = 150;
@@ -30,6 +31,13 @@ namespace CarMarket_Proyecto
             txtNumR.KeyPress += Validaciones.Telefono_KeyPress;
 
             this.AcceptButton = btRegistrar;
+
+            txtNombreR.Validating += txtNombreR_Validating;
+            txtEdad.Validating += txtEdad_Validating;
+            txtEmailR.Validating += txtEmailR_Validating;
+            txtNumR.Validating += txtNumR_Validating;
+            txtContraseñaR.Validating += txtContraseñaR_Validating;
+            txtConfirmContraseña.Validating += txtConfirmContraseña_Validating;
         }
 
         private void pbClose_Click(object sender, EventArgs e)
@@ -255,6 +263,73 @@ namespace CarMarket_Proyecto
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+            }
+        }
+        // Validación del nombre
+        private void txtNombreR_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validaciones.EsNombreValido(txtNombreR.Text))
+            {
+                MessageBox.Show("Ingrese un nombre válido.");
+                e.Cancel = true;
+            }
+        }
+        // Validación de la edad
+        private void txtEdad_Validating(object sender, CancelEventArgs e)
+        {
+            int edad;
+
+            if (!int.TryParse(txtEdad.Text, out edad))
+            {
+                MessageBox.Show("La edad debe ser numérica.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (edad < 18 || edad > 120)
+            {
+                MessageBox.Show("Edad fuera del rango permitido.");
+                e.Cancel = true;
+            }
+        }
+        // Validación del email
+        private void txtEmailR_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validaciones.EsCorreoValido(txtEmailR.Text))
+            {
+                MessageBox.Show("Correo electrónico inválido.");
+                e.Cancel = true;
+            }
+        }
+        // Validación de LA CONTRASEÑA  
+        private void txtContraseñaR_Validating(object sender, CancelEventArgs e)
+        {
+            string mensaje;
+
+            if (!Validaciones.EsContrasenaSegura(
+                txtContraseñaR.Text,
+                out mensaje))
+            {
+                MessageBox.Show(mensaje);
+                e.Cancel = true;
+            }
+        }
+        // Validación de la confirmación de la contraseña
+        private void txtConfirmContraseña_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtContraseñaR.Text != txtConfirmContraseña.Text)
+            {
+                MessageBox.Show("Las contraseñas no coinciden.");
+                e.Cancel = true;
+            }
+        }
+        // Validación del número telefónico
+        private void txtNumR_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validaciones.EsTelefonoValido(txtNumR.Text))
+            {
+                MessageBox.Show("Número telefónico inválido.");
+                e.Cancel = true;
             }
         }
     }
