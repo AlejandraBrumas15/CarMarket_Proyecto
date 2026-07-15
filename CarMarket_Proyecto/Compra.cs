@@ -364,5 +364,15 @@ namespace CarMarket_Proyecto
                 }
             }
         }
+
+        private void btLimpiar_Click(object sender, EventArgs e)
+        {
+            cbTipoC.SelectedIndex = -1;
+            cbMarcaC.SelectedIndex = -1;
+            cbAñoC.SelectedIndex = -1;
+            cbPrecioC.SelectedIndex = -1;
+
+
+        }
     }
 }

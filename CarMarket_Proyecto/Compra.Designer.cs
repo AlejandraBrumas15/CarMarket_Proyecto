@@ -51,6 +51,7 @@
             this.cbAñoC = new System.Windows.Forms.ComboBox();
             this.cbPrecioC = new System.Windows.Forms.ComboBox();
             this.btFiltrar = new System.Windows.Forms.Button();
+            this.btLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaximizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -174,6 +175,7 @@
             // 
             // pbVolver
             // 
+            this.pbVolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbVolver.Image = ((System.Drawing.Image)(resources.GetObject("pbVolver.Image")));
             this.pbVolver.Location = new System.Drawing.Point(29, 22);
             this.pbVolver.Name = "pbVolver";
@@ -334,7 +336,7 @@
             // btFiltrar
             // 
             this.btFiltrar.BackColor = System.Drawing.Color.Orange;
-            this.btFiltrar.Location = new System.Drawing.Point(586, 411);
+            this.btFiltrar.Location = new System.Drawing.Point(586, 394);
             this.btFiltrar.Name = "btFiltrar";
             this.btFiltrar.Size = new System.Drawing.Size(149, 41);
             this.btFiltrar.TabIndex = 63;
@@ -342,12 +344,24 @@
             this.btFiltrar.UseVisualStyleBackColor = false;
             this.btFiltrar.Click += new System.EventHandler(this.btFiltrar_Click);
             // 
+            // btLimpiar
+            // 
+            this.btLimpiar.BackColor = System.Drawing.Color.SeaGreen;
+            this.btLimpiar.Location = new System.Drawing.Point(600, 452);
+            this.btLimpiar.Name = "btLimpiar";
+            this.btLimpiar.Size = new System.Drawing.Size(121, 32);
+            this.btLimpiar.TabIndex = 64;
+            this.btLimpiar.Text = "Limpiar Filtro";
+            this.btLimpiar.UseVisualStyleBackColor = false;
+            this.btLimpiar.Click += new System.EventHandler(this.btLimpiar_Click);
+            // 
             // Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(808, 520);
+            this.Controls.Add(this.btLimpiar);
             this.Controls.Add(this.btFiltrar);
             this.Controls.Add(this.cbPrecioC);
             this.Controls.Add(this.cbAñoC);
@@ -410,5 +424,6 @@
         private System.Windows.Forms.ComboBox cbAñoC;
         private System.Windows.Forms.ComboBox cbPrecioC;
         private System.Windows.Forms.Button btFiltrar;
+        private System.Windows.Forms.Button btLimpiar;
     }
 }

@@ -61,7 +61,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.btEditarVenta = new System.Windows.Forms.Button();
             this.btPublicar = new System.Windows.Forms.Button();
             this.pbMaximizar = new System.Windows.Forms.PictureBox();
             this.pbClose = new System.Windows.Forms.PictureBox();
@@ -486,22 +485,11 @@
             this.label15.TabIndex = 40;
             this.label15.Text = "ℹ️ Consejos para vender más\r\n rápido y seguro\r\n";
             // 
-            // btEditarVenta
-            // 
-            this.btEditarVenta.BackColor = System.Drawing.Color.LightCoral;
-            this.btEditarVenta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btEditarVenta.Location = new System.Drawing.Point(590, 424);
-            this.btEditarVenta.Name = "btEditarVenta";
-            this.btEditarVenta.Size = new System.Drawing.Size(171, 38);
-            this.btEditarVenta.TabIndex = 22;
-            this.btEditarVenta.Text = "Editar Información\r\n  Vehicular";
-            this.btEditarVenta.UseVisualStyleBackColor = false;
-            // 
             // btPublicar
             // 
             this.btPublicar.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btPublicar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btPublicar.Location = new System.Drawing.Point(590, 485);
+            this.btPublicar.Location = new System.Drawing.Point(590, 452);
             this.btPublicar.Name = "btPublicar";
             this.btPublicar.Size = new System.Drawing.Size(171, 38);
             this.btPublicar.TabIndex = 23;
@@ -547,6 +535,7 @@
             // 
             // pbVolver
             // 
+            this.pbVolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbVolver.Image = ((System.Drawing.Image)(resources.GetObject("pbVolver.Image")));
             this.pbVolver.Location = new System.Drawing.Point(41, 26);
             this.pbVolver.Name = "pbVolver";
@@ -567,7 +556,6 @@
             this.Controls.Add(this.pbMaximizar);
             this.Controls.Add(this.pbClose);
             this.Controls.Add(this.btPublicar);
-            this.Controls.Add(this.btEditarVenta);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
@@ -629,7 +617,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Button btEditarVenta;
         private System.Windows.Forms.Button btPublicar;
         private System.Windows.Forms.PictureBox pbMaximizar;
         private System.Windows.Forms.PictureBox pbClose;

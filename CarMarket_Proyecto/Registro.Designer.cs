@@ -42,7 +42,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtNumR = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btEditar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtContraseñaR = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -115,7 +114,7 @@
             this.btRegistrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btRegistrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btRegistrar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btRegistrar.Location = new System.Drawing.Point(401, 417);
+            this.btRegistrar.Location = new System.Drawing.Point(294, 409);
             this.btRegistrar.Name = "btRegistrar";
             this.btRegistrar.Size = new System.Drawing.Size(131, 45);
             this.btRegistrar.TabIndex = 12;
@@ -194,18 +193,6 @@
             this.label5.TabIndex = 28;
             this.label5.Text = "Teléfono:";
             // 
-            // btEditar
-            // 
-            this.btEditar.BackColor = System.Drawing.Color.Salmon;
-            this.btEditar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btEditar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btEditar.Location = new System.Drawing.Point(158, 417);
-            this.btEditar.Name = "btEditar";
-            this.btEditar.Size = new System.Drawing.Size(131, 45);
-            this.btEditar.TabIndex = 30;
-            this.btEditar.Text = "Editar ";
-            this.btEditar.UseVisualStyleBackColor = false;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -265,12 +252,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(701, 508);
+            this.ClientSize = new System.Drawing.Size(701, 479);
             this.Controls.Add(this.txtConfirmContraseña);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtContraseñaR);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.btEditar);
             this.Controls.Add(this.txtNumR);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtEmailR);
@@ -313,7 +299,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNumR;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btEditar;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtContraseñaR;
         private System.Windows.Forms.Label label8;
