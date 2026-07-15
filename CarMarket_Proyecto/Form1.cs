@@ -18,6 +18,9 @@ namespace CarMarket_Proyecto
         public Form1()
         {
             InitializeComponent();
+            txtNombreI.MaxLength = 150;
+            txtContraseñaI.MaxLength = 200;
+            this.AcceptButton = btIniciar;
         }
 
 
@@ -101,7 +104,7 @@ namespace CarMarket_Proyecto
             string contraseña = txtContraseñaI.Text;
 
             if (string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(contraseña))
+    string.IsNullOrWhiteSpace(contraseña))
             {
                 MessageBox.Show(
                     "Ingrese el correo y la contraseña.",
@@ -110,6 +113,33 @@ namespace CarMarket_Proyecto
                     MessageBoxIcon.Warning
                 );
 
+                return;
+            }
+
+            if (!Validaciones.EsCorreoValido(email))
+            {
+                MessageBox.Show(
+                    "Ingrese un correo electrónico válido.",
+                    "Correo incorrecto",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtNombreI.Focus();
+                return;
+            }
+
+            if (contraseña.Length > 200)
+            {
+                MessageBox.Show(
+                    "La contraseña supera la longitud permitida.",
+                    "Contraseña incorrecta",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtContraseñaI.Clear();
+                txtContraseñaI.Focus();
                 return;
             }
 
@@ -197,8 +227,7 @@ namespace CarMarket_Proyecto
             catch (SqlException ex)
             {
                 MessageBox.Show(
-                    "No se pudo consultar la base de datos.\n\n" +
-                    ex.Message,
+                    Validaciones.ObtenerMensajeSql(ex),
                     "Error de base de datos",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error

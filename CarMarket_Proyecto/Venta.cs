@@ -19,6 +19,21 @@ namespace CarMarket_Proyecto
         public Venta()
         {
             InitializeComponent();
+            cbMarca.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAño.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            txtModelo.MaxLength = 80;
+            txtPrecioOriginal.MaxLength = 13;
+            txtPrecioVenta.MaxLength = 13;
+            txtKilometro.MaxLength = 13;
+            txtColor.MaxLength = 40;
+            txtDetalles.MaxLength = 1000;
+
+            txtPrecioOriginal.KeyPress += Validaciones.Decimal_KeyPress;
+            txtPrecioVenta.KeyPress += Validaciones.Decimal_KeyPress;
+            txtKilometro.KeyPress += Validaciones.Decimal_KeyPress;
+            txtColor.KeyPress += Validaciones.SoloLetras_KeyPress;
         }
         // desde aqui el codigo se encarga de minimizar, y cerrar y aparte mantener el tamaño en caso de que se minimice y se maximice la ventana
         private void pbClose_Click(object sender, EventArgs e)
@@ -127,13 +142,18 @@ namespace CarMarket_Proyecto
             decimal precioVenta;
             decimal kilometraje;
 
-            if (string.IsNullOrWhiteSpace(marca) ||
+            if (cbMarca.SelectedIndex < 0 ||
+                cbTipo.SelectedIndex < 0 ||
+                cbAño.SelectedIndex < 0 ||
                 string.IsNullOrWhiteSpace(modelo) ||
-                string.IsNullOrWhiteSpace(tipo) ||
-                string.IsNullOrWhiteSpace(color))
+                string.IsNullOrWhiteSpace(color) ||
+                string.IsNullOrWhiteSpace(detalles) ||
+                string.IsNullOrWhiteSpace(txtPrecioOriginal.Text) ||
+                string.IsNullOrWhiteSpace(txtPrecioVenta.Text) ||
+                string.IsNullOrWhiteSpace(txtKilometro.Text))
             {
                 MessageBox.Show(
-                    "Complete todos los datos obligatorios.",
+                    "Complete todos los campos obligatorios.",
                     "Datos incompletos",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -142,7 +162,21 @@ namespace CarMarket_Proyecto
                 return;
             }
 
-            if (!short.TryParse(cbAño.Text, out año))
+            if (!Validaciones.EsModeloValido(modelo))
+            {
+                MessageBox.Show(
+                    "El modelo contiene caracteres no permitidos.",
+                    "Modelo incorrecto",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtModelo.Focus();
+                return;
+            }
+
+            if (!short.TryParse(cbAño.Text, out año) ||
+                !Validaciones.EsAnioVehiculoValido(año))
             {
                 MessageBox.Show(
                     "Seleccione un año válido.",
@@ -151,16 +185,16 @@ namespace CarMarket_Proyecto
                     MessageBoxIcon.Warning
                 );
 
+                cbAño.Focus();
                 return;
             }
 
-            if (!decimal.TryParse(
-                    txtPrecioOriginal.Text,
-                    out precioOriginal) ||
-                precioOriginal <= 0)
+            if (!Validaciones.TryDecimalPositivo(
+                txtPrecioOriginal.Text,
+                out precioOriginal))
             {
                 MessageBox.Show(
-                    "Ingrese un precio original válido.",
+                    "Ingrese un precio original válido y mayor que cero.",
                     "Precio incorrecto",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -170,13 +204,12 @@ namespace CarMarket_Proyecto
                 return;
             }
 
-            if (!decimal.TryParse(
-                    txtPrecioVenta.Text,
-                    out precioVenta) ||
-                precioVenta <= 0)
+            if (!Validaciones.TryDecimalPositivo(
+                txtPrecioVenta.Text,
+                out precioVenta))
             {
                 MessageBox.Show(
-                    "Ingrese un precio de venta válido.",
+                    "Ingrese un precio de venta válido y mayor que cero.",
                     "Precio incorrecto",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -186,10 +219,9 @@ namespace CarMarket_Proyecto
                 return;
             }
 
-            if (!decimal.TryParse(
-                    txtKilometro.Text,
-                    out kilometraje) ||
-                kilometraje < 0)
+            if (!Validaciones.TryDecimalNoNegativo(
+                txtKilometro.Text,
+                out kilometraje))
             {
                 MessageBox.Show(
                     "Ingrese un kilometraje válido.",
@@ -199,6 +231,32 @@ namespace CarMarket_Proyecto
                 );
 
                 txtKilometro.Focus();
+                return;
+            }
+
+            if (!Validaciones.EsColorValido(color))
+            {
+                MessageBox.Show(
+                    "El color debe contener solamente letras.",
+                    "Color incorrecto",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtColor.Focus();
+                return;
+            }
+
+            if (!Validaciones.EsDescripcionValida(detalles))
+            {
+                MessageBox.Show(
+                    "La descripción debe tener entre 10 y 1000 caracteres.",
+                    "Descripción incorrecta",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtDetalles.Focus();
                 return;
             }
 
@@ -310,9 +368,8 @@ namespace CarMarket_Proyecto
             catch (SqlException ex)
             {
                 MessageBox.Show(
-                    "No se pudo publicar el vehículo.\n\n" +
-                    ex.Message,
-                    "Error de base de datos",
+                    Validaciones.ObtenerMensajeSql(ex),
+                    "No se pudo publicar el vehículo",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );

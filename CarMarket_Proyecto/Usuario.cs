@@ -41,5 +41,44 @@ namespace CarMarket_Proyecto
         {
             return this.email == email && this.contraseña == contraseña;
         }
+        public bool ValidarDatosRegistro(out string mensaje)
+        {
+            mensaje = "";
+
+            if (!Validaciones.EsNombreValido(nombre))
+            {
+                mensaje =
+                    "El nombre debe contener entre 2 y 100 caracteres y solo letras.";
+
+                return false;
+            }
+
+            if (edad < 16 || edad > 120)
+            {
+                mensaje = "La edad debe estar entre 16 y 120 años.";
+                return false;
+            }
+
+            if (!Validaciones.EsCorreoValido(email))
+            {
+                mensaje = "Ingrese un correo electrónico válido.";
+                return false;
+            }
+
+            if (!Validaciones.EsTelefonoValido(telefono))
+            {
+                mensaje = "Ingrese un teléfono válido de 7 a 15 dígitos.";
+                return false;
+            }
+
+            if (!Validaciones.EsContrasenaSegura(
+                contraseña,
+                out mensaje))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

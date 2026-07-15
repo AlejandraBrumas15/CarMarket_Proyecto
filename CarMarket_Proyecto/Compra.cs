@@ -18,6 +18,25 @@ namespace CarMarket_Proyecto
         public Compra()
         {
             InitializeComponent();
+            cbTipoC.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbMarcaC.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAñoC.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbPrecioC.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // Corrige los valores que actualmente tienen errores.
+            int indiceToyota = cbMarcaC.Items.IndexOf("Toyoya");
+
+            if (indiceToyota >= 0)
+            {
+                cbMarcaC.Items[indiceToyota] = "Toyota";
+            }
+
+            int indiceHyundai = cbMarcaC.Items.IndexOf("Hyundai ");
+
+            if (indiceHyundai >= 0)
+            {
+                cbMarcaC.Items[indiceHyundai] = "Hyundai";
+            }
         }
         // desde aqui el codigo se encarga de minimizar, y cerrar y aparte mantener el tamaño en caso de que se minimice y se maximice la ventana
         private void pbClose_Click(object sender, EventArgs e)
@@ -254,12 +273,18 @@ namespace CarMarket_Proyecto
                     continue;
 
                 if (!string.IsNullOrWhiteSpace(marca) &&
-                    vehiculo.GetMarca() != marca)
+                Validaciones.NormalizarTexto(vehiculo.GetMarca()) !=
+                Validaciones.NormalizarTexto(marca))
+                {
                     continue;
+                }
 
                 if (!string.IsNullOrWhiteSpace(tipo) &&
-                    vehiculo.GetTipoCarro() != tipo)
+                    Validaciones.NormalizarTexto(vehiculo.GetTipoCarro()) !=
+                    Validaciones.NormalizarTexto(tipo))
+                {
                     continue;
+                }
 
                 if (año.HasValue &&
                     vehiculo.GetAño() != año.Value)
@@ -285,48 +310,148 @@ namespace CarMarket_Proyecto
 
         private void btFiltrar_Click(object sender, EventArgs e)
         {
-            string marca = cbMarcaC.Text;
-            string tipo = cbTipoC.Text;
-
-            int? año = null;
-            if (!string.IsNullOrWhiteSpace(cbAñoC.Text))
+            try
             {
-                int añoConvertido;
-                if (int.TryParse(cbAñoC.Text, out añoConvertido))
+                string marca = cbMarcaC.SelectedIndex >= 0
+                    ? cbMarcaC.Text.Trim()
+                    : null;
+
+                string tipo = cbTipoC.SelectedIndex >= 0
+                    ? cbTipoC.Text.Trim()
+                    : null;
+
+                int? año = null;
+
+                if (cbAñoC.SelectedIndex >= 0)
                 {
+                    int añoConvertido;
+
+                    if (!int.TryParse(
+                        cbAñoC.Text,
+                        out añoConvertido) ||
+                        !Validaciones.EsAnioVehiculoValido(
+                            añoConvertido))
+                    {
+                        MessageBox.Show(
+                            "Seleccione un año válido.",
+                            "Filtro incorrecto",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+
+                        return;
+                    }
+
                     año = añoConvertido;
                 }
-            }
 
-            double? precio = null;
+                double? precio = null;
 
-            if (!string.IsNullOrWhiteSpace(cbPrecioC.Text))
-            {
-                string[] partes = cbPrecioC.Text.Split('-');
-
-                if (partes.Length == 2)
+                if (cbPrecioC.SelectedIndex >= 0)
                 {
+                    string[] partes =
+                        cbPrecioC.Text.Split('-');
+
+                    if (partes.Length != 2)
+                    {
+                        MessageBox.Show(
+                            "Seleccione un rango de precio válido.",
+                            "Filtro incorrecto",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+
+                        return;
+                    }
+
                     precio = ConvertirPrecio(partes[1]);
+
+                    if (!precio.HasValue || precio.Value <= 0)
+                    {
+                        MessageBox.Show(
+                            "Seleccione un rango de precio válido.",
+                            "Filtro incorrecto",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+
+                        return;
+                    }
+                }
+
+                if (DatosTemporales.ListaPublicaciones == null)
+                {
+                    DatosTemporales.ListaPublicaciones =
+                        ObtenerPublicacionesDesdeBD();
+                }
+
+                List<Publicacion> resultados =
+                    BuscarPublicaciones(
+                        DatosTemporales.ListaPublicaciones,
+                        marca,
+                        tipo,
+                        año,
+                        precio
+                    );
+
+                MostrarPublicaciones(resultados);
+
+                if (resultados.Count == 0)
+                {
+                    MessageBox.Show(
+                        "No se encontraron vehículos con esos filtros.",
+                        "Sin resultados",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
             }
-
-            List<Publicacion> resultados = BuscarPublicaciones(
-                DatosTemporales.ListaPublicaciones,
-                marca,
-                tipo,
-                año,
-                precio);
-
-            MostrarPublicaciones(resultados);
-
-            if (resultados.Count == 0)
+            catch (SqlException ex)
             {
-                MessageBox.Show("No se encontraron vehículos.");
+                MessageBox.Show(
+                    Validaciones.ObtenerMensajeSql(ex),
+                    "Error de base de datos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No se pudieron aplicar los filtros.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (DatosTemporales.IdUsuarioActual <= 0)
+            {
+                MessageBox.Show(
+                    "Debe iniciar sesión antes de comprar.",
+                    "Sesión requerida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            if (dtgCompra.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "No hay vehículos disponibles para comprar.",
+                    "Sin vehículos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                return;
+            }
             Publicacion publicacionSeleccionada = null;
 
             foreach (DataGridViewRow fila in dtgCompra.Rows)

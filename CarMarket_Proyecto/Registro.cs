@@ -18,6 +18,18 @@ namespace CarMarket_Proyecto
         public Registro()
         {
             InitializeComponent();
+            txtNombreR.MaxLength = 100;
+            txtEdad.MaxLength = 3;
+            txtEmailR.MaxLength = 150;
+            txtNumR.MaxLength = 20;
+            txtContraseñaR.MaxLength = 200;
+            txtConfirmContraseña.MaxLength = 200;
+
+            txtNombreR.KeyPress += Validaciones.SoloLetras_KeyPress;
+            txtEdad.KeyPress += Validaciones.SoloNumeros_KeyPress;
+            txtNumR.KeyPress += Validaciones.Telefono_KeyPress;
+
+            this.AcceptButton = btRegistrar;
         }
 
         private void pbClose_Click(object sender, EventArgs e)
@@ -95,16 +107,19 @@ namespace CarMarket_Proyecto
         private void btRegistrar_Click(object sender, EventArgs e)
         {
             string nombre = txtNombreR.Text.Trim();
-            string email = txtEmailR.Text.Trim();
+            string email = txtEmailR.Text.Trim().ToLower();
             string telefono = txtNumR.Text.Trim();
             string contraseña = txtContraseñaR.Text;
+            string confirmacion = txtConfirmContraseña.Text;
 
             int edad;
 
             if (string.IsNullOrWhiteSpace(nombre) ||
+                string.IsNullOrWhiteSpace(txtEdad.Text) ||
                 string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(telefono) ||
-                string.IsNullOrWhiteSpace(contraseña))
+                string.IsNullOrWhiteSpace(contraseña) ||
+                string.IsNullOrWhiteSpace(confirmacion))
             {
                 MessageBox.Show(
                     "Debe completar todos los campos.",
@@ -129,7 +144,7 @@ namespace CarMarket_Proyecto
                 return;
             }
 
-            if (contraseña != txtConfirmContraseña.Text)
+            if (contraseña != confirmacion)
             {
                 MessageBox.Show(
                     "Las contraseñas no coinciden.",
@@ -140,6 +155,29 @@ namespace CarMarket_Proyecto
 
                 txtConfirmContraseña.Clear();
                 txtConfirmContraseña.Focus();
+                return;
+            }
+
+            Usuario nuevoUsuario = new Usuario(
+                nombre,
+                edad,
+                email,
+                telefono,
+                contraseña
+            );
+
+            string mensajeValidacion;
+
+            if (!nuevoUsuario.ValidarDatosRegistro(
+                out mensajeValidacion))
+            {
+                MessageBox.Show(
+                    mensajeValidacion,
+                    "Datos incorrectos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
                 return;
             }
 
@@ -203,7 +241,7 @@ namespace CarMarket_Proyecto
             catch (SqlException ex)
             {
                 MessageBox.Show(
-                    ex.Message,
+                    Validaciones.ObtenerMensajeSql(ex),
                     "No se pudo registrar el usuario",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
