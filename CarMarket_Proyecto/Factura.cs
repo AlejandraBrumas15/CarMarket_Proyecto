@@ -123,7 +123,7 @@ namespace CarMarket_Proyecto
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btConfirmarCompra_Click(object sender, EventArgs e)
         {
             if (PublicacionRecibida == null)
             {
@@ -137,17 +137,7 @@ namespace CarMarket_Proyecto
                 return;
             }
 
-            if (DatosTemporales.IdUsuarioActual <= 0)
-            {
-                MessageBox.Show(
-                    "Debe iniciar sesión para realizar la compra.",
-                    "Sesión requerida",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
-                return;
-            }
+          
 
             try
             {

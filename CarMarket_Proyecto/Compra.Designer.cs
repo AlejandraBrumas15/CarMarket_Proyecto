@@ -254,6 +254,7 @@
             // 
             // cbTipoC
             // 
+            this.cbTipoC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoC.FormattingEnabled = true;
             this.cbTipoC.Items.AddRange(new object[] {
             "Sedán",
@@ -266,6 +267,7 @@
             // 
             // cbMarcaC
             // 
+            this.cbMarcaC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarcaC.FormattingEnabled = true;
             this.cbMarcaC.Items.AddRange(new object[] {
             "Hyundai ",
@@ -287,6 +289,7 @@
             // 
             // cbAñoC
             // 
+            this.cbAñoC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAñoC.FormattingEnabled = true;
             this.cbAñoC.Items.AddRange(new object[] {
             "2026",
@@ -322,6 +325,7 @@
             // 
             // cbPrecioC
             // 
+            this.cbPrecioC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPrecioC.FormattingEnabled = true;
             this.cbPrecioC.Items.AddRange(new object[] {
             "1000 - 5000",

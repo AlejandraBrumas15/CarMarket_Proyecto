@@ -233,8 +233,8 @@ namespace CarMarket_Proyecto
                     pub.GetVehiculo().GetMarca(),
                     pub.GetVehiculo().GetModelo(),
                     pub.GetVehiculo().GetAño(),
-                    pub.GetVehiculo().GetPrecioVenta(),
-                    pub.GetVehiculo().CalcularPrecioDevaluado(),
+                    pub.GetVehiculo().GetPrecioVenta(). ToString("F2"),
+                    pub.GetVehiculo().CalcularPrecioDevaluado().ToString("F2"),
                     pub.GetVehiculo().ObtenerMensajeEstafa()
                 );
                     dtgCompra.Rows[indice].Tag = pub; // guarda el objeto completo en esa fila
@@ -453,6 +453,7 @@ namespace CarMarket_Proyecto
 
                 return;
             }
+
             Publicacion publicacionSeleccionada = null;
 
             foreach (DataGridViewRow fila in dtgCompra.Rows)

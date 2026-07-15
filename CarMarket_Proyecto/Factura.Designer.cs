@@ -40,7 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lvFactura = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btConfirmarCompra = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolverC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaximizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).BeginInit();
@@ -50,6 +50,7 @@
             // 
             // pbVolverC
             // 
+            this.pbVolverC.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbVolverC.Image = ((System.Drawing.Image)(resources.GetObject("pbVolverC.Image")));
             this.pbVolverC.Location = new System.Drawing.Point(16, 21);
             this.pbVolverC.Name = "pbVolverC";
@@ -66,9 +67,9 @@
             this.label20.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.Location = new System.Drawing.Point(64, 21);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(87, 16);
+            this.label20.Size = new System.Drawing.Size(107, 16);
             this.label20.TabIndex = 62;
-            this.label20.Text = "Volver a inicio";
+            this.label20.Text = "Volver a compras";
             // 
             // label3
             // 
@@ -172,16 +173,15 @@
             this.lvFactura.TabIndex = 64;
             this.lvFactura.UseCompatibleStateImageBehavior = false;
             // 
-            // button1
+            // btConfirmarCompra
             // 
-            this.button1.BackColor = System.Drawing.Color.PowderBlue;
-            this.button1.Location = new System.Drawing.Point(446, 367);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 40);
-            this.button1.TabIndex = 65;
-            this.button1.Text = "Realizar compra";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btConfirmarCompra.BackColor = System.Drawing.Color.PowderBlue;
+            this.btConfirmarCompra.Location = new System.Drawing.Point(446, 367);
+            this.btConfirmarCompra.Name = "btConfirmarCompra";
+            this.btConfirmarCompra.Size = new System.Drawing.Size(129, 40);
+            this.btConfirmarCompra.TabIndex = 65;
+            this.btConfirmarCompra.Text = "Realizar compra";
+            this.btConfirmarCompra.UseVisualStyleBackColor = false;
             // 
             // Factura
             // 
@@ -189,7 +189,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(600, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btConfirmarCompra);
             this.Controls.Add(this.lvFactura);
             this.Controls.Add(this.pbVolverC);
             this.Controls.Add(this.label20);
@@ -229,6 +229,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListView lvFactura;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btConfirmarCompra;
     }
 }

@@ -228,11 +228,12 @@
             // cbTipo
             // 
             this.cbTipo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipo.FormattingEnabled = true;
             this.cbTipo.Items.AddRange(new object[] {
             "Sedan",
             "PickUp",
-            "SVU"});
+            "SUV"});
             this.cbTipo.Location = new System.Drawing.Point(270, 76);
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(121, 21);
@@ -253,6 +254,7 @@
             // cbAño
             // 
             this.cbAño.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbAño.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAño.FormattingEnabled = true;
             this.cbAño.Items.AddRange(new object[] {
             "2026",
@@ -303,6 +305,7 @@
             // cbMarca
             // 
             this.cbMarca.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarca.FormattingEnabled = true;
             this.cbMarca.Items.AddRange(new object[] {
             "Hyndai",
