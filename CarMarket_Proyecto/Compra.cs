@@ -427,15 +427,6 @@ namespace CarMarket_Proyecto
             }
         }
 
-private void btLimpiar_Click(object sender, EventArgs e)
-{
-    cbMarcaC.SelectedIndex = -1;
-    cbTipoC.SelectedIndex = -1;
-    cbAñoC.SelectedIndex = -1;
-    cbPrecioC.SelectedIndex = -1;
-
-    MostrarPublicaciones(DatosTemporales.ListaPublicaciones);
-}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -507,7 +498,7 @@ private void btLimpiar_Click(object sender, EventArgs e)
             cbAñoC.SelectedIndex = -1;
             cbPrecioC.SelectedIndex = -1;
 
-
+  MostrarPublicaciones(DatosTemporales.ListaPublicaciones);
         }
     }
 }
